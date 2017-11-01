@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hello {{ name }}</h1>
+    <form action="http://localhost:3000/test" method="POST">
+        <input type="text" name="myname">
+        <input type="submit" value="提交">
+    </form>
+    <script>
+        const ws = new WebSocket('ws://localhost:3000/test');
+        ws.onopen = function () {
+            ws.onmessage = function (msg) {
+                console.log(`客户端接收到消息: `, msg.data);
+            };
+            ws.send('hello websocket');
+        };
+    </script>
+</body>
+</html>
